@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,600,600i,700&display=swap");
+
+/* Anpassar fontfamiljen och nollställer margin, padding, dekoration och liststil för body-elementet */
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  outline: none;
+  background-image: url("curtain.png"); /* Bakgrundsbilden för hela sidan */
+}
+
+/* En container för att centrera innehållet och sätta bakgrundsfärg */
+.container {
+  margin: 1em auto;
+  background-color: rgb(22, 32, 32);
+}
+
+/* En container som sträcker sig över hela bredden av skärmen */
+.container-fluid {
+  max-width: 98%;
+}
+
+/* En grid-container med 6 kolumner och lite marginal */
+.grid {
+  display: grid;
+  margin-left: 0.5px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 0.2em;
+  justify-content: center;
+}
+
+/* Stilmall för h2-elementet */
+h2 {
+  background-color: antiquewhite;
+}
+
+/* En container för filmdetaljer med bakgrundsfärg, padding och textfärg */
+.movie-details-container {
+  background-color: rgb(33 37 41);
+  padding: 20px;
+  color: aliceblue;
+}
+
+/* En klass för filmbild med bredd, högermarginal */
+.movie-image {
+  width: 20rem;
+  margin-right: 20px;
+}
+
+/* Stilmall för filmdetaljer */
+.movie-details {
+  padding-left: 1rem;
+}
+
+/* En container för kommentarsektionen */
+.comments-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Stilmall för etiketten för kommentarer */
+.comment-label {
+  font-weight: bold;
+  margin-top: 2rem;
+  font-size: larger;
+}
+
+/* En grupp för formulärsfält med flex-layout och marginal */
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+/* Stilmall för formulärfält */
+.form-control {
+  flex: 1;
+  margin-right: 10px;
+}
+
+/* En grupp för knappar med flex-layout, mellanrum och överst margin */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* En container för visning av kommentarer med bakgrundsfärg, padding och textfärg */
+.comments-display {
+  background-color: #f5f5f5;
+  padding: 10px;
+  color: rgb(30, 29, 29);
+}
+
+/* Stilmall för kommentarlistan */
+.comments-display ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Stilmall för enskilda kommentarer i listan */
+.comments-display li {
+  padding: 5px 0;
+}
+
+/* Media queries för att justera grid-layout och bildbredd vid olika skärmstorlekar */
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .movie-image {
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .movie-image {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .movie-image {
+    width: 100%;
+  }
+}
