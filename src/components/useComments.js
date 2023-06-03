@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 
 const useComments = (id) => {
-  const [comments, setComments] = useState([]); // State för kommentarer
-  const [likeDislike, setLikeDislike] = useState(null); // State för gilla/ogilla
+  const [comments, setComments] = useState([]);
+  const [likeDislike, setLikeDislike] = useState(null);
 
   useEffect(() => {
-    // Hämta sparade kommentarer från localStorage vid montering av komponenten
     const storedComments = JSON.parse(localStorage.getItem(`comments-${id}`));
     if (storedComments) {
       setComments(storedComments);
@@ -13,12 +12,10 @@ const useComments = (id) => {
   }, [id]);
 
   useEffect(() => {
-    // Spara kommentarer i localStorage vid ändringar av kommentar-state eller ID
     localStorage.setItem(`comments-${id}`, JSON.stringify(comments));
   }, [id, comments]);
 
   useEffect(() => {
-    // Hämta sparad gilla/ogilla-information från localStorage vid montering av komponenten
     const storedLikeDislike = localStorage.getItem(`likeDislike-${id}`);
 
     if (storedLikeDislike) {
@@ -27,21 +24,19 @@ const useComments = (id) => {
   }, [id]);
 
   useEffect(() => {
-    // Spara gilla/ogilla-information i localStorage vid ändringar av gilla/ogilla-state eller ID
     localStorage.setItem(`likeDislike-${id}`, likeDislike);
   }, [id, likeDislike]);
 
   const handleSubmitComment = (comment, movieId) => {
-    // Hantera inskickad kommentar och lägg till den i kommentarlistan
     const newComment = {
       movieId: movieId,
       comment: comment,
+      timestamp: new Date().toLocaleString(), // Add timestamp with current date and time
     };
     setComments([...comments, newComment]);
   };
 
   const handleLikeDislike = (action) => {
-    // Hantera gilla/ogilla-funktionen
     if (likeDislike === action) {
       setLikeDislike(null);
     } else {
@@ -49,7 +44,6 @@ const useComments = (id) => {
     }
   };
 
-  // Returnera kommentarer, gilla/ogilla-information och relevanta hanteringsfunktioner
   return {
     comments,
     likeDislike,
