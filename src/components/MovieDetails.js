@@ -8,25 +8,24 @@ const API_KEY = '0d79d730fff942862b97a7f954332e81';
 
 const MovieDetails = ({ movies }) => {
   const { id } = useParams();
-  const [movie, setMovie] = useState(null); // Tillstånd för den valda filmen
-  const [comment, setComment] = useState(''); // Tillstånd för användarens kommentar
-  const [showDeleteButton, setShowDeleteButton] = useState(false); // Tillstånd för att visa/radera knapp för alla kommentarer
-
-  // Använd anpassade kroken för att hantera kommentarer
+  const [movie, setMovie] = useState(null);
+  const [comment, setComment] = useState('');
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
+  
   const { comments, likeDislike, handleSubmitComment, handleLikeDislike, setComments } = useComments(id);
 
   const handleDeleteComments = () => {
-    setComments([]); // Radera alla kommentarer
-    localStorage.removeItem(`comments-${id}`); // Ta bort kommentarerna från localStorage
-    setShowDeleteButton(false); // Dölj raderingsknappen
+    setComments([]);
+    localStorage.removeItem(`comments-${id}`);
+    setShowDeleteButton(false);
   };
 
   const onSubmitComment = (e) => {
     e.preventDefault();
     if (comment.trim() !== '') {
-      handleSubmitComment(comment, id); // Lägg till kommentaren genom att anropa kroken
-      setComment(''); // Rensa kommentarfältet
-      setShowDeleteButton(true); // Visa raderingsknappen
+      handleSubmitComment(comment, id);
+      setComment('');
+      setShowDeleteButton(true);
     }
   };
 
@@ -89,7 +88,7 @@ const MovieDetails = ({ movies }) => {
           <div>
             <h3>{movie.title}</h3>
             <p>Utgivningsår: {movie.releaseYear}</p>
-            <p>Regissör: {movie.director}</p> {/* OBS: Regissören saknas i koden */}
+            <p>Regissör: {movie.director}</p>
             <h5>Genomsnittligt betyg: {movie.voteAverage}</h5>
             <br />
             <h6>Översikt</h6>
@@ -97,7 +96,7 @@ const MovieDetails = ({ movies }) => {
             <br />
           </div>
         </Col>
-          <RelatedBook movie={movie} />
+        <RelatedBook movie={movie} />
       </Row>
 
       <div className="comments-section">
@@ -126,19 +125,21 @@ const MovieDetails = ({ movies }) => {
             <ul>
               {comments.map((comment) => (
                 <li key={comment.id}>
-                  <span className="comment-info">
-                    <span className="comment-id">ID: {comment.id}</span>
+                  <div className="comment-content">
+                    {comment.comment}
+                  </div>
+                  <div className="comment-info">
                     <span className="comment-timestamp">
-                      {comment.timestamp}
+                      {comment.timestamp.toLocaleString('sv-SE')}
                     </span>
-                  </span>
-                  {comment.comment}
+                  </div>
                 </li>
               ))}
             </ul>
           ) : (
             <p>Inga kommentarer ännu.</p>
           )}
+
         </div>
       </div>
     </div>
